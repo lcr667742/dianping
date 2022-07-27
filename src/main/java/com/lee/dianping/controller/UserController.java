@@ -1,5 +1,8 @@
 package com.lee.dianping.controller;
 
+import com.lee.dianping.common.CommonError;
+import com.lee.dianping.common.CommonRes;
+import com.lee.dianping.common.EmBusinessError;
 import com.lee.dianping.model.UserModel;
 import com.lee.dianping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +33,15 @@ public class UserController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public UserModel getUser(@RequestParam(name = "id") int id){
-       return this.userService.getUser(id);
+    public CommonRes getUser(@RequestParam(name = "id") int id){
+
+        UserModel user = this.userService.getUser(id);
+
+        if(user == null){
+            return CommonRes.create(new CommonError(EmBusinessError.NO_OBJECT_FOUND), "fail");
+        }
+
+        return CommonRes.create(user);
     }
 
     /**
