@@ -1,5 +1,6 @@
 package com.lee.dianping.controller;
 
+import com.lee.dianping.common.BusinessException;
 import com.lee.dianping.common.CommonError;
 import com.lee.dianping.common.CommonRes;
 import com.lee.dianping.common.EmBusinessError;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @Description 用户入口
@@ -33,12 +35,12 @@ public class UserController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public CommonRes getUser(@RequestParam(name = "id") int id){
+    public CommonRes getUser(@RequestParam(name = "id") int id) throws BusinessException {
 
         UserModel user = this.userService.getUser(id);
 
         if(user == null){
-            return CommonRes.create(new CommonError(EmBusinessError.NO_OBJECT_FOUND), "fail");
+            throw new BusinessException(EmBusinessError.NO_OBJECT_FOUND);
         }
 
         return CommonRes.create(user);
@@ -52,7 +54,14 @@ public class UserController {
      */
     @RequestMapping("/test")
     @ResponseBody
-    public String test(){
-        return "test";
+    public ModelAndView test() {
+
+        String name = "Test";
+
+        ModelAndView modelAndView = new ModelAndView("/test.html");
+
+        modelAndView.addObject("name", name);
+
+        return modelAndView;
     }
 }
