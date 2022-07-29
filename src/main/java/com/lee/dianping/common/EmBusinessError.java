@@ -9,8 +9,10 @@ package com.lee.dianping.common;
 public enum EmBusinessError {
 
     NO_OBJECT_FOUND(10001, "请求对象不存在"),
+    NO_HANDLER_FOUND(10002, "请求路径不存在"),
+    BIND_EXCEPTION_ERROR(10003, "请求参数错误"),
 
-    UNKNOWN_ERROR(10002, "未知错误");
+    UNKNOWN_ERROR(19999, "未知错误");
 
 
     /**
