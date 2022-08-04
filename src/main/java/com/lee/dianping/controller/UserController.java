@@ -1,11 +1,10 @@
 package com.lee.dianping.controller;
 
 import com.lee.dianping.common.BusinessException;
-import com.lee.dianping.common.CommonError;
 import com.lee.dianping.common.CommonRes;
 import com.lee.dianping.common.EmBusinessError;
-import com.lee.dianping.model.UserModel;
-import com.lee.dianping.service.UserService;
+import com.lee.dianping.entity.User;
+import com.lee.dianping.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /**
      * @param id: 用户id
@@ -37,7 +36,7 @@ public class UserController {
     @ResponseBody
     public CommonRes getUser(@RequestParam(name = "id") int id) throws BusinessException {
 
-        UserModel user = this.userService.getUser(id);
+        User user = this.userService.getUser(id);
 
         if(user == null){
             throw new BusinessException(EmBusinessError.NO_OBJECT_FOUND);

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.lee.dianping"})
-@MapperScan("com.lee.dianping.dao")
+@MapperScan("com.lee.dianping.mapper")
 public class DianpingApplication {
 
     public static void main(String[] args) {

@@ -1,8 +1,10 @@
 package com.lee.dianping.service.impl;
 
-import com.lee.dianping.dao.UserModelMapper;
-import com.lee.dianping.model.UserModel;
-import com.lee.dianping.service.UserService;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lee.dianping.entity.User;
+import com.lee.dianping.mapper.UserMapper;
+import com.lee.dianping.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,13 @@ import org.springframework.stereotype.Service;
  * @Version 1.0.0
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    @Autowired
-    private UserModelMapper userModelMapper;
 
     @Override
-    public UserModel getUser(int id) {
-        return this.userModelMapper.selectByPrimaryKey(id);
+    public User getUser(int id) {
+        return this.getById(id);
     }
+
+
 }

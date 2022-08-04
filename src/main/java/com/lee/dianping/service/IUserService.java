@@ -1,6 +1,7 @@
 package com.lee.dianping.service;
 
-import com.lee.dianping.model.UserModel;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.lee.dianping.entity.User;
 
 /**
  * @Description 用户业务处理接口
@@ -8,7 +9,7 @@ import com.lee.dianping.model.UserModel;
  * @Date 2022/7/24 11:03
  * @Version 1.0.0
  */
-public interface UserService {
+public interface IUserService extends IService<User> {
 
     /**
      * @param id: 用户id
@@ -17,5 +18,5 @@ public interface UserService {
      * @description 根据用户id获取用户
      * @date 2022/7/24 11:06
      */
-    UserModel getUser(int id);
+    User getUser(int id);
 }
