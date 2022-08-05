@@ -1,7 +1,6 @@
 package com.lee.dianping.controller;
 
 import com.lee.dianping.common.BusinessException;
-import com.lee.dianping.common.CommonError;
 import com.lee.dianping.common.CommonRes;
 import com.lee.dianping.common.EmBusinessError;
 import com.lee.dianping.entity.User;
