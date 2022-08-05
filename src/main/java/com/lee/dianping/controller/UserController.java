@@ -62,7 +62,7 @@ public class UserController {
      * @param registerReq
      * @return
      */
-    @ApiOperation(value = "根据用户id获取用户", response = CommonRes.class, httpMethod = "POST")
+    @ApiOperation(value = "用户注册", response = CommonRes.class, httpMethod = "POST")
     @PostMapping("/register")
     @ResponseBody
     public CommonRes register(@Valid @RequestBody RegisterReq registerReq, BindingResult bindingResult) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
