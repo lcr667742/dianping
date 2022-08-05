@@ -5,9 +5,7 @@ import com.lee.dianping.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
+ * 用户Mapper
  *
  * @author 61671
  * @since 2022-08-05
