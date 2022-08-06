@@ -1,11 +1,13 @@
 package com.lee.dianping.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lee.dianping.common.BusinessException;
 import com.lee.dianping.common.EmBusinessError;
 import com.lee.dianping.entity.User;
 import com.lee.dianping.mapper.UserMapper;
+import com.lee.dianping.request.LoginReq;
 import com.lee.dianping.service.IUserService;
 import com.lee.dianping.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             this.save(user);
         } catch (DuplicateKeyException ex) {
             throw new BusinessException(EmBusinessError.REGISTER_DUP_FAIL);
+        }
+
+        return user;
+    }
+
+    @Override
+    public User login(LoginReq loginReq) throws UnsupportedEncodingException, NoSuchAlgorithmException, BusinessException {
+
+        QueryWrapper<User> wrapper = new QueryWrapper();
+        wrapper.eq("telphone", loginReq.getTelphone())
+                .eq("password", CommonUtil.encodeByMd5(loginReq.getPassword()));
+
+        User user = this.getOne(wrapper);
+
+        if(user == null){
+            throw new BusinessException(EmBusinessError.LOGIN_FAIL);
         }
 
         return user;
