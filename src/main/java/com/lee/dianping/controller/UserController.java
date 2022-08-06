@@ -4,6 +4,7 @@ import com.lee.dianping.common.BusinessException;
 import com.lee.dianping.common.CommonRes;
 import com.lee.dianping.common.EmBusinessError;
 import com.lee.dianping.entity.User;
+import com.lee.dianping.request.LoginReq;
 import com.lee.dianping.request.RegisterReq;
 import com.lee.dianping.service.IUserService;
 import com.lee.dianping.utils.CommonUtil;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -30,8 +32,13 @@ import java.security.NoSuchAlgorithmException;
 @Api(tags = "用户入口")
 public class UserController {
 
+    public static final String CURRENT_USER_SESSION = "currentUserSession";
+
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
     /**
      * @param id: 用户id
@@ -79,6 +86,60 @@ public class UserController {
         User result = this.userService.register(registerUser);
 
         return CommonRes.create(result);
+
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param loginReq
+     * @param bindingResult
+     * @return
+     * @throws BusinessException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
+    @ApiOperation(value = "用户登录", response = CommonRes.class, httpMethod = "POST")
+    @PostMapping("/login")
+    @ResponseBody
+    public CommonRes login(@Valid @RequestBody LoginReq loginReq, BindingResult bindingResult) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+        if (bindingResult.hasErrors()) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, CommonUtil.processBindingResult(bindingResult));
+        }
+
+        User user = this.userService.login(loginReq);
+        //将用户对象放入会话
+        this.httpServletRequest.getSession().setAttribute("CURRENT_USER_SESSION", user);
+
+        return CommonRes.create(user);
+    }
+
+    /**
+     * 用户注销
+     *
+     * @return
+     */
+    @ApiOperation(value = "用户注销", response = CommonRes.class, httpMethod = "GET")
+    @GetMapping("/logout")
+    public CommonRes logout() {
+
+        this.httpServletRequest.getSession().invalidate();
+
+        return CommonRes.create(null);
+    }
+
+    /**
+     * 获取当前用户
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取当前用户", response = CommonRes.class, httpMethod = "GET")
+    @GetMapping("/getCurrentUser")
+    public CommonRes getCurrentUser() {
+
+        User user = (User) this.httpServletRequest.getSession().getAttribute("CURRENT_USER_SESSION");
+
+        return CommonRes.create(user);
 
     }
 
