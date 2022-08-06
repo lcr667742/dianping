@@ -109,7 +109,7 @@ public class UserController {
 
         User user = this.userService.login(loginReq);
         //将用户对象放入会话
-        this.httpServletRequest.getSession().setAttribute("CURRENT_USER_SESSION", user);
+        this.httpServletRequest.getSession().setAttribute(CURRENT_USER_SESSION, user);
 
         return CommonRes.create(user);
     }
@@ -137,7 +137,7 @@ public class UserController {
     @GetMapping("/getCurrentUser")
     public CommonRes getCurrentUser() {
 
-        User user = (User) this.httpServletRequest.getSession().getAttribute("CURRENT_USER_SESSION");
+        User user = (User) this.httpServletRequest.getSession().getAttribute(CURRENT_USER_SESSION);
 
         return CommonRes.create(user);
 
