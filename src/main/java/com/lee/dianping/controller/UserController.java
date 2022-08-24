@@ -40,6 +40,7 @@ public class UserController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
+
     /**
      * @param id: 用户id
      * @return UserModel
@@ -135,6 +136,7 @@ public class UserController {
      */
     @ApiOperation(value = "获取当前用户", response = CommonRes.class, httpMethod = "GET")
     @GetMapping("/getCurrentUser")
+    @ResponseBody
     public CommonRes getCurrentUser() {
 
         User user = (User) this.httpServletRequest.getSession().getAttribute(CURRENT_USER_SESSION);
@@ -150,9 +152,7 @@ public class UserController {
      * @date 2022/7/23 22:57
      */
     @ApiOperation(value = "用户测试接口", httpMethod = "GET")
-    @ApiImplicitParam
     @RequestMapping("/test")
-    @ResponseBody
     public ModelAndView test() {
 
         String name = "Test";
