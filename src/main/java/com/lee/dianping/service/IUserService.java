@@ -42,4 +42,10 @@ public interface IUserService extends IService<User> {
      * @throws BusinessException
      */
     User login(LoginReq loginReq) throws UnsupportedEncodingException, NoSuchAlgorithmException, BusinessException;
+
+    /**
+     * 统计已注册用户
+     * @return
+     */
+    int countAllUsr();
 }

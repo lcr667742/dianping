@@ -64,4 +64,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         return user;
     }
+
+    @Override
+    public int countAllUsr() {
+        return this.getBaseMapper().countAllUser();
+    }
 }

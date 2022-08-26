@@ -17,6 +17,9 @@ public enum EmBusinessError {
     REGISTER_DUP_FAIL(20001,"用户已存在"),
     LOGIN_FAIL(20002,"手机号或密码错误"),
 
+    //admin相关错误
+    ADMIN_SHOULD_LOGIN(30001,"管理员需要登录"),
+    ADMIN_LOGIN_FAIL(20002,"邮箱号或密码错误"),
 
     UNKNOWN_ERROR(19999, "未知错误");
 
