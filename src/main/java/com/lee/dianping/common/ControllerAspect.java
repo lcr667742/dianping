@@ -51,6 +51,7 @@ public class ControllerAspect {
         if(email == null){
             if("text/html".equals(adminPermission.produceType())){
                 httpServletResponse.sendRedirect("/admin/admin/loginPage");
+                return null;
             } else {
                 CommonError commonError= new CommonError(EmBusinessError.ADMIN_SHOULD_LOGIN);
                 return CommonRes.create(commonError,"fail");
