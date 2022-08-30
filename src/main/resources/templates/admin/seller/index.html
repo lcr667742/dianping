@@ -184,6 +184,7 @@ License: You must have a valid license purchased only from themeforest(the above
         Index.init();
         var baseUrl = "/admin/seller/index?page="
         setUrl(baseUrl);
+
         var totalSize = /*[[${data.total}]]*/;
         var countPerPage = /*[[${data.pageSize}]]*/;
         var currentPage = /*[[${data.pageNum}]]*/;
@@ -194,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
         $(".add").on("click", function(){
-            window.location.href = "/admin/seller/createpage";
+            window.location.href = "/admin/seller/createPage";
         });
 
 
