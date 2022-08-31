@@ -1,0 +1,24 @@
+server:
+  port: 8180
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+spring:
+  profiles:
+    active: dev
+  resources:
+    add-mappings: true #add-mappings=true表示如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配
+  mvc:
+    throw-exception-if-no-handler-found: true #没有处理器则抛异常
+
+#接入前端静态资源页面
+#由于使用了swagger2，导致该配置失效，已在SwaggerConfig配置了静态资源接入
+#spring.mvc.static-path-pattern=/static/**
+
+#thymeleaf相关的配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+
