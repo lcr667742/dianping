@@ -109,7 +109,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <td th:text="${seller.id}"></td>
                                     <td th:text="${seller.name}"></td>
                                     <td th:text="${seller.remarkScore}"></td>
-                                    <td th:text="${seller.disabledFlag}"></td>
+                                    <td>
+                                        <div th:style="(${seller.disabledFlag}==1) ?'display:none'" >启用</div>
+                                        <div th:style="(${seller.disabledFlag}==0) ?'display:none'" >禁用</div>
+                                    </td>
                                     <td>
                                         <a th:style="(${seller.disabledFlag}==0) ?'display:none'" href="#"  th:id="'up'+${seller.id}"  th:attr="data-id=${seller.id}" class="btn default btn-xs blue">启用</a>
                                         <a th:style="(${seller.disabledFlag}==1) ?'display:none'" href="#"  th:id="'down'+${seller.id}" th:attr="data-id=${seller.id}" class="btn default btn-xs red">禁用</a>

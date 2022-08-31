@@ -19,7 +19,10 @@ public enum EmBusinessError {
 
     //admin相关错误
     ADMIN_SHOULD_LOGIN(30001,"管理员需要登录"),
-    ADMIN_LOGIN_FAIL(20002,"邮箱号或密码错误"),
+    ADMIN_LOGIN_FAIL(30002,"邮箱号或密码错误"),
+
+    //商家相关错误
+    SELLER_NOT_EXIST(40001,"商家不存在"),
 
     UNKNOWN_ERROR(19999, "未知错误");
 

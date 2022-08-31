@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lee.dianping.common.AdminPermission;
 import com.lee.dianping.common.BusinessException;
+import com.lee.dianping.common.CommonRes;
 import com.lee.dianping.common.EmBusinessError;
 import com.lee.dianping.entity.Seller;
 import com.lee.dianping.request.PageQuery;
@@ -15,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -106,5 +108,35 @@ public class SellerController {
         this.sellerService.create(seller);
 
         this.httpServletResponse.sendRedirect("/admin/seller/index");
+    }
+
+    /**
+     * 商家启用
+     *
+     * @param id 商家id
+     * @return
+     */
+    @ApiOperation(value = "商家启用", httpMethod = "POST")
+    @RequestMapping("/up")
+    public CommonRes up(@RequestParam int id) throws BusinessException {
+
+        int rev = this.sellerService.changeStatus(id, 0);
+
+        return CommonRes.create(rev);
+    }
+
+    /**
+     * 商家禁用
+     *
+     * @param id 商家id
+     * @return
+     */
+    @ApiOperation(value = "商家禁用", httpMethod = "POST")
+    @RequestMapping("/down")
+    public CommonRes down(@RequestParam int id) throws BusinessException {
+
+        int rev = this.sellerService.changeStatus(id, 1);
+
+        return CommonRes.create(rev);
     }
 }

@@ -2,6 +2,7 @@ package com.lee.dianping.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lee.dianping.common.BusinessException;
 import com.lee.dianping.entity.Seller;
 
 import java.util.List;
@@ -28,4 +29,14 @@ public interface ISellerService extends IService<Seller> {
      * @return
      */
     List<Seller> getAllSeller();
+
+    /**
+     * 商家启用/禁用
+     *
+     * @param id 商家id
+     * @param operate 0-启用 1-禁用
+     * @return
+     * @throws BusinessException
+     */
+    int changeStatus(int id, int operate) throws BusinessException;
 }
