@@ -1,0 +1,8 @@
+#Application Context Initializers
+org.springframework.context.ApplicationContextInitializer=\
+com.lee.dianping.config.MyApplicationInitializer
+
+
+#Application Listeners
+org.springframework.context.ApplicationListener=\
+com.lee.dianping.config.MyApplicationListener
