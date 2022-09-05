@@ -24,6 +24,9 @@ public enum EmBusinessError {
     //商家相关错误
     SELLER_NOT_EXIST(40001,"商家不存在"),
 
+    //品类相关错误
+    CATEGORY_DUP_FAIL(50001,"品类已存在"),
+
     UNKNOWN_ERROR(19999, "未知错误");
 
 
