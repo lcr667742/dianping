@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dianping.mapper.ShopMapper">
+
+    <resultMap id="shopMap" type="com.lee.dianping.entity.Shop">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="remarkScore" column="remark_score"/>
+        <result property="pricePerMan" column="price_per_man"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="tags" column="tags"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="address" column="address"/>
+        <result property="sellerId" column="seller_id"/>
+        <result property="iconUrl" column="icon_url"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <!-- 品类属性 -->
+        <association property="category" javaType="com.lee.dianping.entity.Category" columnPrefix="c_">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="iconUrl" column="icon_url"/>
+            <result property="sort" column="sort"/>
+            <result property="disabledFlag" column="disabled_flag"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="updatedAt" column="updated_at"/>
+        </association>
+        <!-- 商家属性 -->
+        <association property="seller" javaType="com.lee.dianping.entity.Seller" columnPrefix="se_">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="remarkScore" column="remark_score"/>
+            <result property="disabledFlag" column="disabled_flag"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="updatedAt" column="updated_at"/>
+        </association>
+    </resultMap>
+
+    <!-- 关联查询店家列表 -->
+    <select id="getAllWithAssociation" resultMap="shopMap">
+        select
+            s.*,
+            se.id se_id,
+            se.name se_name,
+            se.remark_score se_remark_score,
+            se.disabled_flag se_disabled_flag,
+            se.created_at se_created_at,
+            se.updated_at se_updated_at,
+            c.id c_id,
+            c.name c_name,
+            c.icon_url c_icon_url,
+            c.sort c_sort,
+            c.disabled_flag c_disabled_flag,
+            c.created_at c_created_at,
+            c.updated_at c_updated_at
+        from
+            shop s
+        left join seller se
+                  on
+                      s.seller_id = se.id
+        left join category c
+                  on
+                      s.category_id = c.id
+
+    </select>
+
+</mapper>
